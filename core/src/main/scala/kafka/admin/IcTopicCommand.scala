@@ -158,10 +158,13 @@ object IcTopicCommand extends Logging {
 
 
     val createTopicOptions = new CreateTopicsOptions()
-    adminClient.createTopics(Seq(newTopic).asJavaCollection, createTopicOptions).all().get(futuresTimeoutMs, TimeUnit.MILLISECONDS)
 
-    println("Created topic \"%s\".".format(topic))
-
+    try {
+      adminClient.createTopics(Seq(newTopic).asJavaCollection, createTopicOptions).all().get(futuresTimeoutMs, TimeUnit.MILLISECONDS)
+      println("Created topic \"%s\".".format(topic))
+    } catch {
+      case e: TopicExistsException => if (!ifNotExists) throw e
+    }
   }
 
 
