@@ -159,6 +159,8 @@ object IcTopicCommand extends Logging {
 
     val createTopicOptions = new CreateTopicsOptions()
 
+    println("This is a tgz of the updated IcTopicCommand")
+
     try {
       adminClient.createTopics(Seq(newTopic).asJavaCollection, createTopicOptions).all().get(futuresTimeoutMs, TimeUnit.MILLISECONDS)
       println("Created topic \"%s\".".format(topic))
