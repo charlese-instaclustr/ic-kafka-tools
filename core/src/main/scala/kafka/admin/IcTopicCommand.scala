@@ -162,7 +162,7 @@ object IcTopicCommand extends Logging {
       println("Created topic \"%s\".".format(topic))
     } catch {
       case e: java.util.concurrent.ExecutionException  => {
-        if (!ifNotExists || !e.getCause.isInstanceOf[TopicExistsException]) throw e
+        if (!(ifNotExists && e.getCause.isInstanceOf[TopicExistsException])) throw e
       }
     }
   }
