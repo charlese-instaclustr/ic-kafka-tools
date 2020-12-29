@@ -163,7 +163,13 @@ object IcTopicCommand extends Logging {
       println("Created topic \"%s\".".format(topic))
     } catch {
       case e: java.util.concurrent.ExecutionException  => {
-        if (!(ifNotExists && e.getCause.isInstanceOf[TopicExistsException])) throw e
+        val causeOption: Option[Throwable] = Option(e.getCause)
+        causeOption match {
+          case Some(cause) =>
+            if (!(ifNotExists && cause.isInstanceOf[TopicExistsException])) throw e
+          case None =>
+            throw e
+        }
       }
     }
   }
