@@ -170,6 +170,7 @@ object IcTopicCommand extends Logging {
             throw e
         }
       }
+      case defaultException => throw defaultException
     }
   }
 
