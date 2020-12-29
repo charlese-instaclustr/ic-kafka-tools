@@ -59,7 +59,6 @@ import org.apache.zookeeper.KeeperException.NodeExistsException
 
 import scala.collection.JavaConverters._
 import scala.collection._
-import scala.io.StdIn
 
 object IcTopicCommand extends Logging {
 
